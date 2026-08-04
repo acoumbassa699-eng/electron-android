@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Electron</string>
+    <string name="loading">Loading…</string>
+    <string name="error_title">Error</string>
+    <string name="error_retry">Retry</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="notification_channel_name">Electron Service</string>
+    <string name="notification_channel_description">Background service notifications</string>
+</resources>

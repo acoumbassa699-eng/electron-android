@@ -1,0 +1,39 @@
+# Android-specific build arguments for Electron
+# Build target: Android (ARM, ARM64, x86, x86_64)
+
+import("//build/args/all.gn")
+
+# Android target
+target_os = "android"
+target_cpu = "arm64"  # Default, peut être modifié
+
+# Enable Android features
+electron_enable_android = true
+
+# Disable desktop-specific features
+enable_desktop_cups = false
+enable_desktop_ozone = false
+
+# Android NDK/SDK paths (à configurer sur la machine de build)
+android_ndk_root = "//third_party/android_ndk"
+android_sdk_root = "//third_party/android_sdk"
+
+# Build type
+is_debug = false
+is_official_build = true
+
+# Disable unused desktop features for smaller APK
+enable_printing = false
+enable_nacl = false
+enable_extensions = true
+
+# Enable WebView-based rendering
+use_content_shell = true
+use_crashpad = true
+
+# Chrome options
+is_chrome_branded = false
+proprietary_codecs = true
+
+# Security
+enable_nacl_nonsfi = false
