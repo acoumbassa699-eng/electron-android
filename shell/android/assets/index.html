@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Electron Android</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+        
+        .logo svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        .info {
+            background: #252526;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .info h2 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #007acc;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #3c3c3c;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .info-value {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #005a9e;
+        }
+        
+        button:active {
+            background: #004578;
+        }
+        
+        .secondary {
+            background: #3c3c3c;
+        }
+        
+        .secondary:hover {
+            background: #4c4c4c;
+        }
+        
+        .secondary:active {
+            background: #5c5c5c;
+        }
+        
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #252526;
+            border-radius: 8px;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        #output.visible {
+            display: block;
+        }
+        
+        .log-entry {
+            padding: 4px 0;
+            border-bottom: 1px solid #3c3c3c;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#2196F3"/>
+                <ellipse cx="50" cy="50" rx="30" ry="15" fill="none" stroke="white" stroke-width="2" transform="rotate(-30 50 50)"/>
+                <circle cx="75" cy="35" r="6" fill="white"/>
+            </svg>
+        </div>
+        
+        <h1>Electron Android</h1>
+        <p class="subtitle">Desktop apps on mobile</p>
+        
+        <div class="info">
+            <h2>Device Info</h2>
+            <div class="info-row">
+                <span class="info-label">Platform</span>
+                <span class="info-value" id="platform">Loading...</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Version</span>
+                <span class="info-value" id="version">Loading...</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Screen</span>
+                <span class="info-value" id="screen">Loading...</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Model</span>
+                <span class="info-value" id="model">Loading...</span>
+            </div>
+        </div>
+        
+        <div class="test-buttons">
+            <button onclick="testNotification()">Test Notification</button>
+            <button onclick="testClipboard()" class="secondary">Test Clipboard</button>
+            <button onclick="testFilePicker()" class="secondary">Test File Picker</button>
+            <button onclick="toggleOutput()" class="secondary">Toggle Console</button>
+        </div>
+        
+        <div id="output"></div>
+    </div>
+    
+    <script>
+        // Initialize device info
+        if (window.electron && window.electron.device) {
+            const device = window.electron.device;
+            document.getElementById('platform').textContent = device.platform || 'unknown';
+            document.getElementById('version').textContent = device.version || 'unknown';
+            document.getElementById('screen').textContent = `${device.screenWidth || 0}x${device.screenHeight || 0}`;
+            document.getElementById('model').textContent = device.model || 'unknown';
+        } else {
+            document.getElementById('platform').textContent = 'Web';
+            document.getElementById('version').textContent = '1.0.0';
+            document.getElementById('screen').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            document.getElementById('model').textContent = 'Browser';
+        }
+        
+        function log(message) {
+            console.log(message);
+            const output = document.getElementById('output');
+            output.classList.add('visible');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            output.appendChild(entry);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function testNotification() {
+            if (window.electron && window.electron.notification) {
+                window.electron.notification.show(
+                    'Test Notification',
+                    'This is a test notification from Electron Android!'
+                );
+                log('Notification sent');
+            } else {
+                log('Notification API not available');
+            }
+        }
+        
+        function testClipboard() {
+            if (window.electron && window.electron.clipboard) {
+                window.electron.clipboard.write('Hello from Electron Android!');
+                const text = window.electron.clipboard.read();
+                log('Clipboard write/read: ' + text);
+            } else {
+                log('Clipboard API not available');
+            }
+        }
+        
+        async function testFilePicker() {
+            if (window.electron && window.electron.filePicker) {
+                try {
+                    const files = await window.electron.filePicker.open({
+                        accept: ['*/*']
+                    });
+                    log('Selected files: ' + JSON.stringify(files));
+                } catch (error) {
+                    log('File picker error: ' + error.message);
+                }
+            } else {
+                log('File picker API not available');
+            }
+        }
+        
+        function toggleOutput() {
+            const output = document.getElementById('output');
+            output.classList.toggle('visible');
+        }
+        
+        log('Electron Android app loaded');
+    </script>
+</body>
+</html>

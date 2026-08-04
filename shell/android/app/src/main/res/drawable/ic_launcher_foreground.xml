@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- VS Code Blue Circle -->
+    <path
+        android:fillColor="#007ACC"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
+    
+    <!-- Code Brackets -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,38L28,54L35,70L40,70L33,54L40,38L35,38ZM68,38L73,38L68,54L73,70L68,70L75,54L68,38ZM45,75L50,33L55,33L50,75L45,75Z"/>
+</vector>

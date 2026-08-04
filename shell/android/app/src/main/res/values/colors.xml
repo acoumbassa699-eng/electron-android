@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="electron_background">#1E1E1E</color>
+    <color name="electron_foreground">#FFFFFF</color>
+    <color name="electron_accent">#007ACC</color>
+    <color name="splash_background">#1E1E1E</color>
+</resources>

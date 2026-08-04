@@ -1,25 +1,30 @@
-[![Electron Logo](https://electronjs.org/images/electron-logo.svg)](https://electronjs.org)
+---
 
-[![GitHub Actions Build Status](https://github.com/electron/electron/actions/workflows/build.yml/badge.svg)](https://github.com/electron/electron/actions/workflows/build.yml)
-[![Electron Discord Invite](https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white)](https://discord.gg/electronjs)
+# 🎉 VS Code for Android
 
-:memo: Available Translations: 🇨🇳 🇧🇷 🇪🇸 🇯🇵 🇷🇺 🇫🇷 🇺🇸 🇩🇪.
-View these docs in other languages on our [Crowdin](https://crowdin.com/project/electron) project.
+**Visual Studio Code running on your Android device!**
 
-The Electron framework lets you write cross-platform desktop applications
-using JavaScript, HTML and CSS. It is based on [Node.js](https://nodejs.org/) and
-[Chromium](https://www.chromium.org) and is used by the
-[Visual Studio Code](https://github.com/Microsoft/vscode/) and many other [apps](https://electronjs.org/apps).
+👉 **[Download for Android](https://github.com/acoumbossa699-eng/electron-android/archive/refs/heads/android-base.zip)**
 
-Follow [@electronjs](https://twitter.com/electronjs) on Twitter for important
-announcements.
+### How to Install:
 
-This project adheres to the Contributor Covenant
-[code of conduct](https://github.com/electron/electron/tree/main/CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report unacceptable
-behavior to [coc@electronjs.org](mailto:coc@electronjs.org).
+1. **Download** the project as ZIP
+2. **Open** `shell/android/` in Android Studio
+3. **Build** → **Build APK**
+4. **Install** on your phone!
 
-## Installation
+### Features:
+- ✅ Monaco Editor (VS Code engine)
+- ✅ 100+ programming languages
+- ✅ IntelliSense
+- ✅ 105 built-in extensions
+- ✅ Dark theme
+
+📖 **[Full Documentation](shell/android/README.md)**
+
+---
+
+## Original Electron Project
 
 To install prebuilt Electron binaries, use [`npm`](https://docs.npmjs.com/).
 The preferred method is to install Electron as a development dependency in your

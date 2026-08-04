@@ -1,0 +1,53 @@
+# Copyright 2024 Electron Android Project
+# Build configuration for Android
+
+import("//build/args/all.gn")
+
+# Android build configuration
+group("electron_android") {
+  deps = [
+    "//electron/shell/android/java:electron_java",
+    "//electron/shell/browser/android:electron_android_lib",
+  ]
+}
+
+# Java library for Electron Android
+source_set("electron_java") {
+  sources = [
+    "shell/android/java/org/electron/android/ElectronActivity.java",
+    "shell/android/java/org/electron/android/ElectronApplication.java",
+    "shell/android/java/org/electron/android/bridge/ElectronBridge.java",
+    "shell/android/java/org/electron/android/content/ElectronContentView.java",
+    "shell/android/java/org/electron/android/service/ElectronService.java",
+    "shell/android/java/org/electron/android/view/ElectronRootView.java",
+  ]
+
+  deps = [
+    "//third_party/androidx:androidx_appcompat",
+    "//third_party/androidx:androidx_core",
+    "//third_party/androidx:androidx_fragment",
+  ]
+
+  java_cpp_enum = true
+  incremental_jar = true
+}
+
+# C++ library for Electron Android
+source_set("electron_android_lib") {
+  sources = [
+    "shell/android/electron_android_jni_bridge.cc",
+    "shell/browser/android/electron_android_delegate.cc",
+    "shell/browser/android/electron_native_window_view_android.cc",
+  ]
+
+  deps = [
+    "//content/public/app:content_jni",
+    "//shell/browser:browser",
+    "//ui/android:ui_android",
+    "//base:base",
+  ]
+
+  if (is_component_build) {
+    ldflags = [ "-Wl,--no-undefined" ]
+  }
+}

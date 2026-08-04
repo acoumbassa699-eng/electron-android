@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/electron_accent</item>
+        <item name="colorPrimaryDark">@color/electron_background</item>
+        <item name="colorAccent">@color/electron_accent</item>
+        <item name="android:colorBackground">@color/electron_background</item>
+        <item name="android:windowBackground">@color/electron_background</item>
+        <item name="android:statusBarColor">@color/electron_background</item>
+        <item name="android:navigationBarColor">@color/electron_background</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/splash_background</item>
+        <item name="android:statusBarColor">@color/splash_background</item>
+        <item name="android:navigationBarColor">@color/splash_background</item>
+    </style>
+</resources>
